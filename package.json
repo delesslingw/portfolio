@@ -16,7 +16,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "prepublish": "npm run build && git add . && git commit -am",
-        "publish:patch": "npm version patch && npm publish --access public",
+        "publish:patch": "echo 'Bumping version...' && npm version patch && echo 'Publishing package...' && npm publish --access public",
         "publish": "npm run publish:patch"
     },
     "dependencies": {
