@@ -16,7 +16,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "commit": "git add . && git commit -am",
-        "version": "npm version patch && git add . && git commit -am \"Version Bump\"",
+        "prepublishOnly": "npm version patch",
         "publish:patch": "npm publish --access public",
         "publish": "npm run publish:patch"
     },
