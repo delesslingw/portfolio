@@ -1,7 +1,7 @@
 {
     "name": "@delesslin/portfolio",
     "private": false,
-    "version": "0.0.15",
+    "version": "0.0.16",
     "description": "Build files for a vite react portfolio for DeLesslin George-Warren",
     "author": "delesslin",
     "license": "MIT",
