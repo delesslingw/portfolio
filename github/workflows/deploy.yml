@@ -1,0 +1,16 @@
+name: Update on Render Server
+
+on:
+    release:
+        types: [published]
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Trigger Render Deployment
+              run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
