@@ -36,12 +36,12 @@ export default function P5Canvas() {
                     }
 
                     align(boids: Boid[]) {
-                        let perceptionRadius = 50;
-                        let steering = p.createVector();
+                        const perceptionRadius = 50;
+                        const steering = p.createVector();
                         let total = 0;
 
-                        for (let other of boids) {
-                            let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+                        for (const other of boids) {
+                            const d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
                             if (other !== this && d < perceptionRadius) {
                                 steering.add(other.vel);
                                 total++;
@@ -59,12 +59,12 @@ export default function P5Canvas() {
                     }
 
                     cohesion(boids: Boid[]) {
-                        let perceptionRadius = 50;
-                        let steering = p.createVector();
+                        const perceptionRadius = 50;
+                        const steering = p.createVector();
                         let total = 0;
 
-                        for (let other of boids) {
-                            let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+                        for (const other of boids) {
+                            const d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
                             if (other !== this && d < perceptionRadius) {
                                 steering.add(other.pos);
                                 total++;
@@ -83,14 +83,14 @@ export default function P5Canvas() {
                     }
 
                     separation(boids: Boid[]) {
-                        let perceptionRadius = 24;
-                        let steering = p.createVector();
+                        const perceptionRadius = 24;
+                        const steering = p.createVector();
                         let total = 0;
 
-                        for (let other of boids) {
-                            let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+                        for (const other of boids) {
+                            const d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
                             if (other !== this && d < perceptionRadius) {
-                                let diff = p5.Vector.sub(this.pos, other.pos);
+                                const diff = p5.Vector.sub(this.pos, other.pos);
                                 diff.div(d * d);
                                 steering.add(diff);
                                 total++;
@@ -108,9 +108,9 @@ export default function P5Canvas() {
                     }
 
                     flock(boids: Boid[]) {
-                        let alignment = this.align(boids);
-                        let cohesion = this.cohesion(boids);
-                        let separation = this.separation(boids);
+                        const alignment = this.align(boids);
+                        const cohesion = this.cohesion(boids);
+                        const separation = this.separation(boids);
 
                         this.acc.add(alignment);
                         this.acc.add(cohesion);
@@ -134,7 +134,7 @@ export default function P5Canvas() {
                     }
                 }
 
-                let flock: Boid[] = [];
+                const flock: Boid[] = [];
 
                 p.setup = () => {
                     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -145,7 +145,7 @@ export default function P5Canvas() {
 
                 p.draw = () => {
                     p.background(255);
-                    for (let boid of flock) {
+                    for (const boid of flock) {
                         boid.edges();
                         boid.flock(flock);
                         boid.update();
