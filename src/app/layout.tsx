@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: "DeLesslin George-Warren",
     description: "Code, art, and advocacy by DeLesslin",
+    // icons: {
+    //     icon: "/favicon.ico",
+    // },
 };
 
 export default function RootLayout({
@@ -24,6 +27,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                <link rel="icon" href="/images/favicon.ico" sizes="any" />
+            </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
         </html>
     );
