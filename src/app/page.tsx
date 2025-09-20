@@ -1,4 +1,4 @@
-import P5Canvas from "@/src/components/P5Canvas";
+import P5Canvas from "@/components/P5Canvas";
 import Projects from "../components/Projects";
 export const revalidate = false; // SSG at build; set to a number for ISR
 
