@@ -20,7 +20,12 @@ export type Project = {
 const DIR = path.join(process.cwd(), "content", "projects");
 
 export async function getAllProjects(): Promise<Project[]> {
-    const files = (await fs.readdir(DIR)).filter((f) => f.endsWith(".md"));
+    let files: string[] = [];
+    try {
+        files = (await fs.readdir(DIR)).filter((f) => f.endsWith(".md"));
+    } catch {
+        return [];
+    }
     const projects = await Promise.all(
         files.map(async (file) => {
             const slug = file.replace(/\.md$/, "");
