@@ -53,9 +53,9 @@ export async function getAllProjects(): Promise<Project[]> {
 
 function filterArray(arr: string[]) {
     console.log(arr);
-    console.log(arr.length);
-    if (arr.length === 0) {
+    if (!Array.isArray(arr) || arr.length === 0) {
         return [];
     }
+    console.log(arr.length);
     return arr.filter((entry) => typeof entry === "string" && entry.length > 0);
 }

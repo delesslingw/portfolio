@@ -21,14 +21,15 @@ const Project = ({ p }: { p: ProjectType }) => {
             </p>
 
             {p.description && <p>{p.description}</p>}
-
-            {p.images &&
-                p.images.length > 0 &&
-                p.images.map((img) => (
-                    <div key={img}>
-                        <Image src={img} alt={p.title} width={1200} height={700} />
-                    </div>
-                ))}
+            <div className="grid grid-cols-3 gap-2">
+                {p.images &&
+                    p.images.length > 0 &&
+                    p.images.map((img) => (
+                        <div key={img} className="w-full h-auto object-cover">
+                            <Image src={img} alt={p.title} width={1200} height={700} />
+                        </div>
+                    ))}
+            </div>
 
             {/* Markdown body */}
             <div dangerouslySetInnerHTML={{ __html: p.contentHtml }} />
