@@ -12,3 +12,7 @@
     - gt create -am "your commit message"
     - gt submit
     - gt sync
+
+## TODO
+
+-   [ ] Checks for project: is the slug valid? does the folder exist in public > projects? do all the referenced images and audio exist?
