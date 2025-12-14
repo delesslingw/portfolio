@@ -8,6 +8,8 @@
     - npm run new:project generate a new project.md file in content/projects and a new project-folder in public/projects/project and example assets
     - npm run delete:project delete project.md, corresponding public/projects/project folder and all content in that folder
     - npm run dev
+
+    ### Graphite submit
     - npm run lint (important to ensure vercel build succeeds)
     - gt create -am "your commit message"
     - gt submit
