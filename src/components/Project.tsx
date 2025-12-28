@@ -5,20 +5,26 @@ import { Project as ProjectType } from '../lib/projects'
 
 const Project = ({ p }: { p: ProjectType }) => {
   return (
-    <article key={p.slug}>
-      <h2>{p.title}</h2>
-      <p>
-        {p.dates}
-        {p.location ? ` • ${p.location}` : ''}
-      </p>
-
-      {p.description && <p>{p.description}</p>}
-      <div style={{ maxWidth: 500, margin: '0 auto' }}>
+    <article
+      className='project'
+      key={p.slug}
+      style={{ display: 'flex', flexDirection: 'row', gap: 20, minHeight: 500 }}
+    >
+      <div style={{ flex: '0 0 700px', maxWidth: 700 }}>
         <Images images={p.images} alt={p.title} />
       </div>
-
-      {/* Markdown body */}
-      <div dangerouslySetInnerHTML={{ __html: p.contentHtml }} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 30 }}>
+        <Information
+          title={p.title}
+          location={p.location}
+          dates={p.dates}
+          description={p.description}
+        />
+        <div
+          style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
+          dangerouslySetInnerHTML={{ __html: p.contentHtml }}
+        />
+      </div>
 
       {p.audio &&
         p.audio.length > 0 &&
@@ -33,6 +39,48 @@ const Project = ({ p }: { p: ProjectType }) => {
   )
 }
 
+const Information = ({
+  title,
+  dates,
+  location,
+  description,
+}: {
+  title: string
+  location: string | undefined
+  dates: string
+  description: string | undefined
+}) => {
+  return (
+    <div
+      className='information'
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <div
+        className='title'
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        <h2 style={{ fontSize: 24, fontWeight: 'bold' }}>{title}</h2>
+        <p style={{ fontSize: 16, color: '#333' }}>
+          {dates}
+          {location ? ` • ${location}` : ''}
+        </p>
+      </div>
+
+      {description && (
+        <p style={{ fontSize: 14, fontStyle: 'italic' }}>{description}</p>
+      )}
+    </div>
+  )
+}
+
 const Images = ({
   images,
   alt = '',
@@ -41,8 +89,9 @@ const Images = ({
   alt?: string
 }) => {
   const [active, setActive] = useState(0)
+
   return (
-    <div style={{ display: 'flex', gap: 12, height: 360, width: '100%' }}>
+    <div style={{ display: 'flex', gap: 12, height: 700, width: '100%' }}>
       {images &&
         images.length > 0 &&
         images.map((img, i) => {
@@ -53,14 +102,16 @@ const Images = ({
               onClick={() => setActive(i)}
               style={{
                 all: 'unset',
+                display: 'block',
                 cursor: 'pointer',
-                flexGrow: isActive ? 8 : 1,
+                flexGrow: isActive ? 10 : 1,
                 transition: 'flex-grow 350ms ease',
                 position: 'relative',
                 overflow: 'hidden',
                 borderRadius: 1,
                 height: '100%',
-                minWidth: 40,
+                minWidth: 20,
+                flexBasis: 0,
               }}
             >
               <Image
