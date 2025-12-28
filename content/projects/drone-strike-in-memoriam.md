@@ -8,9 +8,6 @@ images:
     - "unnamed.jpg"
 audio:
 ---
-
-# Drone Strike: In Memoriam
-
 At sunset, a runway of votive candles was lit — one for every child killed by United States drone strikes in Yemen, Pakistan, and other regions as of the date of the performance. Each candle carried a name, written by hand, and placed in parrellel lines stretching across the space like a landing strip.
 
 Performers and audience members moved slowly along the path, reading the names aloud as they walked. Some candles went dark almost immediately, blown out by gusts of wind entering through the open doors. Others burned for hours, until their wax pooled and the wicks disappeared.
