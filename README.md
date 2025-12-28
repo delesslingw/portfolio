@@ -16,7 +16,7 @@
     - gt sync
 
 ## TODO
-
+-   [ ] Adapt design based on screen size
 -   [ ] How to order projects?
 -   [ ] Add other art projects
     -   [ ] Review emails
