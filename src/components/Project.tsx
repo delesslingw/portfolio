@@ -3,12 +3,19 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Project as ProjectType } from '../lib/projects'
 
-const Project = ({ p }: { p: ProjectType }) => {
+const Project = ({ p, color }: { p: ProjectType; color: string }) => {
   return (
     <article
       className='project'
       key={p.slug}
-      style={{ display: 'flex', flexDirection: 'row', gap: 20, minHeight: 500 }}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 20,
+        minHeight: 500,
+        paddingTop: 20,
+        paddingBottom: 20,
+      }}
     >
       <div style={{ flex: '0 0 700px', maxWidth: 700 }}>
         <Images images={p.images} alt={p.title} />
