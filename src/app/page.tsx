@@ -1,5 +1,7 @@
 import MotionTitle from '@/components/MotionTitle'
 import P5Canvas from '@/components/P5Canvas'
+
+import Contact from '@/components/Contact'
 import Projects from '../components/Projects'
 export const revalidate = false // SSG at build; set to a number for ISR
 
@@ -14,6 +16,7 @@ export default function Home() {
       </header>
       <main>
         <Projects />
+        <Contact />
       </main>
     </>
   )
