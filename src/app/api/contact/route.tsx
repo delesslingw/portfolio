@@ -3,13 +3,25 @@ import { Resend } from 'resend'
 
 export const runtime = 'nodejs' // Resend works best in Node runtime
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 export async function POST(req: Request) {
+  // Read env vars at request-time (prevents build-time crashes on Vercel)
+  const apiKey = process.env.RESEND_API_KEY
+  const from = process.env.CONTACT_FROM_EMAIL
+  const bcc = process.env.CONTACT_BCC_EMAIL
+
+  if (!apiKey || !from || !bcc) {
+    return NextResponse.json(
+      { error: 'Server is not configured.' },
+      { status: 500 }
+    )
+  }
+
+  const resend = new Resend(apiKey)
+
   try {
     const body = await req.json()
 
@@ -40,16 +52,6 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { error: 'Message is too long.' },
         { status: 400 }
-      )
-    }
-
-    const from = process.env.CONTACT_FROM_EMAIL
-    const bcc = process.env.CONTACT_BCC_EMAIL
-
-    if (!process.env.RESEND_API_KEY || !from || !bcc) {
-      return NextResponse.json(
-        { error: 'Server is not configured.' },
-        { status: 500 }
       )
     }
 
