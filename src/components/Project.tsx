@@ -49,8 +49,8 @@ const Information = ({
   description: string | undefined
 }) => {
   return (
-    <div className='flex flex-col justify-between gap-3'>
-      <div className='flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between'>
+    <div className='flex flex-col justify-between gap-1'>
+      <div className='flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between'>
         <h2 className='text-2xl font-bold'>{title}</h2>
         <p className='text-base text-neutral-700'>
           {dates}
@@ -58,7 +58,9 @@ const Information = ({
         </p>
       </div>
 
-      {description && <p className='text-sm italic'>{description}</p>}
+      {description && (
+        <p className='text-sm italic text-neutral-700'>{description}</p>
+      )}
     </div>
   )
 }
