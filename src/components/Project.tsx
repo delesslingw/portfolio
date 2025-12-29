@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Project as ProjectType } from '../lib/projects'
 
-const Project = ({ p, color }: { p: ProjectType; color: string }) => {
+const Project = ({ p }: { p: ProjectType }) => {
   return (
     <article
       className='project'
