@@ -3,24 +3,17 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Project as ProjectType } from '../lib/projects'
 
-const Project = ({ p }: { p: ProjectType }) => {
+const Project = ({ p, color }: { p: ProjectType; color: string }) => {
   return (
     <article
-      className='project'
       key={p.slug}
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 20,
-        minHeight: 500,
-        paddingTop: 20,
-        paddingBottom: 20,
-      }}
+      className={`border-l-16 px-4 pb-12 lg:pb-0 lg:mb-8 flex min-h-[500px] flex-col gap-6 lg:flex-row lg:gap-5`}
+      style={{ borderColor: color }}
     >
-      <div style={{ flex: '0 0 700px', maxWidth: 700 }}>
+      <div className='w-full min-w-0 lg:flex-none lg:w-[700px] lg:max-w-[700px]'>
         <Images images={p.images} alt={p.title} />
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 30 }}>
+      <div className='flex w-full min-w-0 flex-col gap-7'>
         <Information
           title={p.title}
           location={p.location}
@@ -28,7 +21,7 @@ const Project = ({ p }: { p: ProjectType }) => {
           description={p.description}
         />
         <div
-          style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
+          className='flex flex-col gap-2.5'
           dangerouslySetInnerHTML={{ __html: p.contentHtml }}
         />
       </div>
@@ -40,8 +33,6 @@ const Project = ({ p }: { p: ProjectType }) => {
             <source src={aud} />
           </audio>
         ))}
-
-      <hr />
     </article>
   )
 }
@@ -58,32 +49,16 @@ const Information = ({
   description: string | undefined
 }) => {
   return (
-    <div
-      className='information'
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div
-        className='title'
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <h2 style={{ fontSize: 24, fontWeight: 'bold' }}>{title}</h2>
-        <p style={{ fontSize: 16, color: '#333' }}>
+    <div className='flex flex-col justify-between gap-3'>
+      <div className='flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between'>
+        <h2 className='text-2xl font-bold'>{title}</h2>
+        <p className='text-base text-neutral-700'>
           {dates}
           {location ? ` • ${location}` : ''}
         </p>
       </div>
 
-      {description && (
-        <p style={{ fontSize: 14, fontStyle: 'italic' }}>{description}</p>
-      )}
+      {description && <p className='text-sm italic'>{description}</p>}
     </div>
   )
 }
@@ -98,7 +73,7 @@ const Images = ({
   const [active, setActive] = useState(0)
 
   return (
-    <div style={{ display: 'flex', gap: 12, height: 700, width: '100%' }}>
+    <div className='flex h-[420px] w-full gap-3 lg:h-[700px]'>
       {images &&
         images.length > 0 &&
         images.map((img, i) => {
@@ -107,34 +82,18 @@ const Images = ({
             <button
               key={img}
               onClick={() => setActive(i)}
-              style={{
-                all: 'unset',
-                display: 'block',
-                cursor: 'pointer',
-                flexGrow: isActive ? 10 : 1,
-                transition: 'flex-grow 350ms ease',
-                position: 'relative',
-                overflow: 'hidden',
-                borderRadius: 1,
-                height: '100%',
-                minWidth: 20,
-                flexBasis: 0,
-              }}
+              className='relative block h-full min-w-[20px] flex-[1_1_0] cursor-pointer overflow-hidden border-0 transition-[flex-grow] duration-300 ease-in-out'
+              style={{ flexGrow: isActive ? 10 : 1 }}
             >
               <Image
                 src={img}
                 alt={alt}
                 fill
-                sizes={isActive ? '70vw' : '5vw'}
-                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                sizes={isActive ? '70vw' : '15vw'}
+                className='object-cover object-center'
               />
             </button>
           )
-          //   return (
-          //     <div key={img} style={{ flex: i === 0 ? 1 : 0.1 }}>
-          //       <Image src={img} alt={alt} width={1200} height={700} />
-          //     </div>
-          //   )
         })}
     </div>
   )
