@@ -1,5 +1,7 @@
+import { toPlainText } from '@react-email/render'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { genEmail } from './ContactEmail'
 
 export const runtime = 'nodejs'
 
@@ -75,23 +77,15 @@ export async function POST(req: Request) {
 
   try {
     const subject = `Thanks for reaching out, ${name}!`
-
+    const html = await genEmail({ name, message })
     const result = await resend.emails.send({
       from,
       to: email,
       bcc,
       replyTo: email,
       subject,
-      text: `Hi ${name},
-
-Thanks for your message — I received it and will follow up soon.
-
-Your message:
---------------------
-${message}
---------------------
-
-— DeLesslin`,
+      html,
+      text: toPlainText(html),
     })
 
     if (result.error) {

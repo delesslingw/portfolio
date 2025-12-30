@@ -69,7 +69,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className='space-y-4'>
-      <label className='block text-white opacity-80'>
+      <label className='block text-white'>
         <span>Name</span>
         <input
           name='name'
@@ -79,7 +79,7 @@ export default function ContactForm() {
         />
       </label>
 
-      <label className='block text-white opacity-80'>
+      <label className='block text-white'>
         <span>Email</span>
         <input
           name='email'
@@ -90,7 +90,7 @@ export default function ContactForm() {
         />
       </label>
 
-      <label className='block text-white opacity-80'>
+      <label className='block text-white'>
         <span>Message</span>
         <textarea
           name='message'
@@ -109,17 +109,20 @@ export default function ContactForm() {
         className='hidden'
         aria-hidden='true'
       />
+      <div className='flex flex-row gap-3 items-center'>
+        <button
+          type='submit'
+          disabled={status === 'sending'}
+          className='border px-4 py-2 text-white'
+        >
+          {status === 'sending' ? 'Sending...' : 'Send'}
+        </button>
 
-      <button
-        type='submit'
-        disabled={status === 'sending'}
-        className='border px-4 py-2 text-white opacity-80'
-      >
-        {status === 'sending' ? 'Sending...' : 'Send'}
-      </button>
-
-      {status === 'sent' && <p>Thanks — message sent.</p>}
-      {status === 'error' && <p className='text-red-600'>{error}</p>}
+        {status === 'sent' && (
+          <p className='text-white text-'>Thanks — message sent.</p>
+        )}
+        {status === 'error' && <p className='text-red-600'>{error}</p>}
+      </div>
     </form>
   )
 }
