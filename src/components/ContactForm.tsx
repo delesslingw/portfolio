@@ -48,6 +48,7 @@ export default function ContactForm() {
       form.reset()
       return
     }
+    console.log('Submitting payload:', parsed.data)
 
     const res = await fetch('/api/contact', {
       method: 'POST',
@@ -56,9 +57,9 @@ export default function ContactForm() {
     })
 
     if (!res.ok) {
-      const data = await res.json().catch(() => ({}))
+      const text = await res.text().catch(() => '')
       setStatus('error')
-      setError(data?.error ?? 'Something went wrong.')
+      setError(text || 'Something went wrong.')
       return
     }
 
