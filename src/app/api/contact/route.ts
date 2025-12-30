@@ -11,6 +11,10 @@ export async function POST(req: Request) {
   const apiKey = process.env.RESEND_API_KEY
   const from = process.env.CONTACT_FROM_EMAIL
   const bcc = process.env.CONTACT_BCC_EMAIL
+  return NextResponse.json(
+    { ok: false, debug: 'route reached' },
+    { status: 418 }
+  )
 
   // Helpful: tell yourself WHICH env var is missing
   if (!apiKey || !from || !bcc) {
@@ -84,6 +88,7 @@ ${message}
     }
 
     return NextResponse.json({ ok: true }, { status: 200 })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     // This will show up in Vercel function logs
     console.error('Contact route failed:', err)
