@@ -1,3 +1,4 @@
+import colors from '@/components/colors'
 import {
   Body,
   Container,
@@ -10,6 +11,7 @@ import {
 } from '@react-email/components'
 
 const ContactEmail = ({ name, message }: { name: string; message: string }) => {
+  const color = colors[Math.floor(colors.length * Math.random())]
   return (
     <Html lang='en'>
       <Body
@@ -22,7 +24,7 @@ const ContactEmail = ({ name, message }: { name: string; message: string }) => {
         {/* Full-width background */}
         <Section
           style={{
-            backgroundColor: '#fe9aaa',
+            backgroundColor: color,
             padding: '40px 16px', // space around the white card
           }}
         >
