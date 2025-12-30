@@ -1,19 +1,24 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-export const runtime = 'nodejs' // Resend works best in Node runtime
+export const runtime = 'nodejs'
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 export async function POST(req: Request) {
-  // Read env vars at request-time (prevents build-time crashes on Vercel)
   const apiKey = process.env.RESEND_API_KEY
   const from = process.env.CONTACT_FROM_EMAIL
   const bcc = process.env.CONTACT_BCC_EMAIL
 
+  // Helpful: tell yourself WHICH env var is missing
   if (!apiKey || !from || !bcc) {
+    console.error('Contact route misconfigured', {
+      hasApiKey: Boolean(apiKey),
+      hasFrom: Boolean(from),
+      hasBcc: Boolean(bcc),
+    })
     return NextResponse.json(
       { error: 'Server is not configured.' },
       { status: 500 }
@@ -29,10 +34,8 @@ export async function POST(req: Request) {
     const email = String(body?.email ?? '').trim()
     const message = String(body?.message ?? '').trim()
 
-    // Honeypot: include a hidden "website" input on the client
     const website = String(body?.website ?? '').trim()
     if (website) {
-      // Silently succeed to avoid tipping off bots
       return NextResponse.json({ ok: true }, { status: 200 })
     }
 
@@ -55,7 +58,6 @@ export async function POST(req: Request) {
       )
     }
 
-    // Send one email: to submitter, BCC you
     const subject = `Thanks for reaching out, ${name}!`
 
     const result = await resend.emails.send({
@@ -77,11 +79,17 @@ ${message}
     })
 
     if (result.error) {
+      console.error('Resend error:', result.error)
       return NextResponse.json({ error: result.error.message }, { status: 502 })
     }
 
     return NextResponse.json({ ok: true }, { status: 200 })
-  } catch {
-    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
+  } catch (err: any) {
+    // This will show up in Vercel function logs
+    console.error('Contact route failed:', err)
+    return NextResponse.json(
+      { error: err?.message ?? 'Internal Server Error' },
+      { status: 500 }
+    )
   }
 }
