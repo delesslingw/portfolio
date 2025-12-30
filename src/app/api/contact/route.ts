@@ -1,3 +1,4 @@
+import colors from '@/components/colors'
 import { toPlainText } from '@react-email/render'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
@@ -29,7 +30,7 @@ export async function POST(req: Request) {
       { status: 500 }
     )
   }
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let body: any
   try {
     body = await req.json()
@@ -76,8 +77,9 @@ export async function POST(req: Request) {
   const resend = new Resend(apiKey)
 
   try {
+    const color = colors[Math.floor(colors.length * Math.random())]
     const subject = `Thanks for reaching out, ${name}!`
-    const html = await genEmail({ name, message })
+    const html = await genEmail({ name, message, color })
     const result = await resend.emails.send({
       from,
       to: email,
@@ -96,6 +98,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ ok: true }, { status: 200 })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     return NextResponse.json(
       {

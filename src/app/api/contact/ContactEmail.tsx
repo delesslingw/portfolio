@@ -1,4 +1,3 @@
-import colors from '@/components/colors'
 import {
   Body,
   Container,
@@ -10,8 +9,15 @@ import {
   Text,
 } from '@react-email/components'
 
-const ContactEmail = ({ name, message }: { name: string; message: string }) => {
-  const color = colors[Math.floor(colors.length * Math.random())]
+const ContactEmail = ({
+  name,
+  message,
+  color,
+}: {
+  name: string
+  message: string
+  color: string
+}) => {
   return (
     <Html lang='en'>
       <Body
@@ -41,8 +47,8 @@ const ContactEmail = ({ name, message }: { name: string; message: string }) => {
             <Text>Tanake {name},</Text>
 
             <Text>
-              Thank you for reaching out! I've received your message and will
-              get back to you as soon as possible.
+              Thank you for reaching out! I&apos;ve received your message and
+              will get back to you as soon as possible.
             </Text>
 
             <Text>Hawu kuri,</Text>
@@ -68,12 +74,14 @@ const ContactEmail = ({ name, message }: { name: string; message: string }) => {
 export const genEmail = async ({
   name,
   message,
+  color,
 }: {
   name: string
   message: string
+  color: string
 }) => {
   return await pretty(
-    await render(<ContactEmail name={name} message={message} />)
+    await render(<ContactEmail name={name} message={message} color={color} />)
   )
 }
 

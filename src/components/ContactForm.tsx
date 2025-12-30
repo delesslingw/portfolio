@@ -68,7 +68,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className='space-y-4'>
+    <form onSubmit={onSubmit} className='space-y-4 max-w-[700]'>
       <label className='block text-white'>
         <span>Name</span>
         <input
