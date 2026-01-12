@@ -91,7 +91,9 @@ const Images = ({
                 src={img}
                 alt={alt}
                 fill
-                sizes={isActive ? '70vw' : '15vw'}
+                sizes='(min-width: 1024px) 700px, 100vw'
+                priority={isActive} // preload active
+                fetchPriority={isActive ? 'high' : 'auto'} // helps in modern browsers
                 className='object-cover object-center'
               />
             </button>
