@@ -1,4 +1,4 @@
-import colors from '@/components/colors'
+import colors from '@/lib/colors'
 import { toPlainText } from '@react-email/render'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
           hasBcc: Boolean(bcc),
         },
       },
-      { status: 500 }
+      { status: 500 },
     )
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json(
       { ok: false, error: 'Body was not valid JSON' },
-      { status: 400 }
+      { status: 400 },
     )
   }
 
@@ -63,14 +63,14 @@ export async function POST(req: Request) {
           messageLen: message.length,
         },
       },
-      { status: 400 }
+      { status: 400 },
     )
   }
 
   if (!isValidEmail(email)) {
     return NextResponse.json(
       { ok: false, error: 'Invalid email address' },
-      { status: 400 }
+      { status: 400 },
     )
   }
 
@@ -93,7 +93,7 @@ export async function POST(req: Request) {
     if (result.error) {
       return NextResponse.json(
         { ok: false, error: 'Resend error', debug: result.error },
-        { status: 502 }
+        { status: 502 },
       )
     }
 
@@ -106,7 +106,7 @@ export async function POST(req: Request) {
         error: 'Unhandled exception',
         debug: String(err?.message ?? err),
       },
-      { status: 500 }
+      { status: 500 },
     )
   }
 }
