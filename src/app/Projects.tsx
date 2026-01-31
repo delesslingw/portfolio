@@ -1,6 +1,6 @@
-import colors from '../components/colors'
 import Project from '../components/Project'
 import Section from '../components/Section'
+import colors from '../lib/colors'
 import { getAllProjects } from '../lib/projects'
 
 export default async function Projects() {

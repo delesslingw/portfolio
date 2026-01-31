@@ -20,6 +20,7 @@ Personal portfolio and utility website
 
 ## TODO
 -   [ ] Adapt design based on screen size
+-   [ ] Filter brand search params
 -   [ ] How to order projects?
 -   [ ] Add other art projects
     -   [ ] Review emails

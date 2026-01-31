@@ -1,5 +1,5 @@
+import colors from '../lib/colors'
 import { getAllProjects } from '../lib/projects'
-import colors from './colors'
 import Project from './Project'
 
 export default async function Projects() {

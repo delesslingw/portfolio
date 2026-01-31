@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server'
 
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
-  console.log('PROXY HIT:', pathname)
 
   // Match "/kudzu.png"
   const match = pathname.match(/^\/([a-z0-9-_]+)\.png$/i)
