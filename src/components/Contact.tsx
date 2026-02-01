@@ -3,7 +3,7 @@ const Contact = () => {
   const color = '#333'
   return (
     <section
-      className='border-l-16 min-h-[500px] flex mb-12'
+      className='border-l-16 min-h-[500px] flex'
       style={{ borderColor: color }}
     >
       <div className='mx-4 flex-1 p-4' style={{ backgroundColor: color }}>

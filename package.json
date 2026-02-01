@@ -5,6 +5,7 @@
   "scripts": {
     "new:project": "node scripts/new-project.mjs",
     "delete:project": "node scripts/delete-project.mjs",
+    "new:song": "node scripts/new-song.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
