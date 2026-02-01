@@ -68,7 +68,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className='space-y-4 max-w-[700]'>
+    <form onSubmit={onSubmit} className='space-y-4 max-w-[700] min-h-[50vh]'>
       <label className='block text-white'>
         <span>Name</span>
         <input
@@ -113,7 +113,7 @@ export default function ContactForm() {
         <button
           type='submit'
           disabled={status === 'sending'}
-          className='border px-4 py-2 text-white'
+          className='border px-4 py-2 text-white cursor-pointer'
         >
           {status === 'sending' ? 'Sending...' : 'Send'}
         </button>

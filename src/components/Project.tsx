@@ -7,10 +7,10 @@ const Project = ({ p, color }: { p: ProjectType; color: string }) => {
   return (
     <article
       key={p.slug}
-      className={`border-l-16 px-4 pb-12 lg:pb-0 lg:mb-8 flex min-h-[500px] flex-col gap-6 lg:flex-row lg:gap-5`}
+      className={`border-l-16 px-4 pb-12 lg:pb-0 lg:mb-8 flex min-h-[90vh] flex-col gap-6 lg:flex-row lg:gap-5`}
       style={{ borderColor: color }}
     >
-      <div className='w-full min-w-0 lg:flex-none lg:w-[700px] lg:max-w-[700px]'>
+      <div className='w-full h-full min-w-0 lg:flex-none lg:w-[700px] lg:max-w-[700px]'>
         <Images images={p.images} alt={p.title} />
       </div>
       <div className='flex w-full min-w-0 flex-col gap-7'>
@@ -75,7 +75,7 @@ const Images = ({
   const [active, setActive] = useState(0)
 
   return (
-    <div className='flex h-[420px] w-full gap-3 lg:h-[700px]'>
+    <div className='flex h-[30vh] w-full gap-3 lg:h-[90vh]'>
       {images &&
         images.length > 0 &&
         images.map((img, i) => {
