@@ -130,7 +130,7 @@ export async function GET(req: Request, ctx: Ctx) {
     }
 
     const slugRecord = await getLinkForSlug(slug);
-    if (!slugRecord || slugRecord.url) {
+    if (!slugRecord || !slugRecord.url) {
         return NextResponse.redirect(fallbackUrl(slug), 302);
     }
 
