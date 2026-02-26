@@ -1,31 +1,45 @@
-import { getAllLinks } from "@/lib/linkStore";
-
+import { getAllLinks, LinkRecord } from "@/lib/linkStore";
+import MotionTitle from "@/components/MotionTitle";
+import P5Canvas from "@/components/P5Canvas";
+import colors from "../../lib/colors";
 export const runtime = "nodejs";
 
+const Link = ({ color, link }: { color: string; link: LinkRecord }) => {
+    return (
+        <a href={link.url} key={link.slug}>
+            <li className="h-28 mb-4 flex w-full border-l-16 pl-4" style={{ borderColor: color }}>
+                <div style={{ backgroundColor: color }} className="w-full flex flex-col pt-2 pl-4">
+                    <h2 className="text-2xl font-black pb-2">{link.title}</h2>
+
+                    <h3>{link.description && <p>{link.description}</p>}</h3>
+                </div>
+            </li>
+        </a>
+    );
+};
 export default async function LinksPage() {
     const links = await getAllLinks();
 
     const publicLinks = links.filter((l) => l.public).sort((a, b) => a.slug.localeCompare(b.slug));
 
     return (
-        <main>
-            <h1>Public Links</h1>
+        <main className="pt-16">
+            <MotionTitle />
+            <div className="absolute inset-0 -z-10">
+                <P5Canvas />
+            </div>
+            <section className="flex flex-col justify-center px-72 pt-32">
+                <div className="py-12">
+                    <h1 className="text-center text-7xl font-black">Links</h1>
+                    <h2 className="italic text-center">look at all my things</h2>
 
-            <ul>
-                {publicLinks.map((link) => (
-                    <li key={link.slug}>
-                        <h2>
-                            <a href={`/${link.slug}`}>{link.title ?? link.slug}</a>
-                        </h2>
-
-                        {link.description && <p>{link.description}</p>}
-
-                        <p>
-                            <a href={`/${link.slug}.png`}>QR</a>
-                        </p>
-                    </li>
-                ))}
-            </ul>
+                    <ul className="mt-12">
+                        {publicLinks.map((link, i) => (
+                            <Link key={link.slug} color={colors[i]} link={link} />
+                        ))}
+                    </ul>
+                </div>
+            </section>
         </main>
     );
 }
