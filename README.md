@@ -1,4 +1,5 @@
 # About
+
 Personal portfolio and utility website
 
 # Notes
@@ -19,11 +20,13 @@ Personal portfolio and utility website
     - `gt sync`
 
 ## TODO
--   [ ] Adapt design based on screen size
--   [ ] Filter brand search params
--   [ ] How to order projects?
--   [ ] Add other art projects
-    -   [ ] Review emails
--   [ ] Add hash based navigation to move between projects
--   [ ] Day/Night mode?
--   [ ] Checks for project: is the slug valid? does the folder exist in public > projects? do all the referenced images and audio exist?
+
+- [x] Adapt design based on screen size
+- [ ] Filter brand search params
+- [ ] How to order projects?
+- [ ] Add other art projects
+    - [ ] Review emails
+- [ ] Add hash based navigation to move between projects
+- [ ] Day/Night mode?
+- [ ] Checks for project: is the slug valid? does the folder exist in public > projects? do all the referenced images and audio exist?
+- [ ] Animate links
