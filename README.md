@@ -30,10 +30,13 @@ Personal portfolio and utility website
 - [ ] Day/Night mode?
 - [ ] Checks for project: is the slug valid? does the folder exist in public > projects? do all the referenced images and audio exist?
 - [ ] Animate links
-- [ ] Update song creation script
 - [ ] Add animation to music player: https://editor.p5js.org/js6450/sketches/XYnHHUIP7
-- [ ] Further refine the new-song.mjs script
-  - [ ] Remove....
+- [x] Further refine the new-song.mjs script
+  - [x] Remove Audio source type (we can assume it will be a local file)
+  - [x] Assume one audio file
+  - [x] Assume one image file
+  - [x] Why "(CSV)" in audio filename and image filenames?
+  - [x] What is the "Copy example image into first filename"? Probably can remove
 - [ ] Handle NOT FOUND in /music/...
 - [ ] separate sketch from P5Canvas
 - [ ] Add music visualizer sketch
@@ -41,5 +44,5 @@ Personal portfolio and utility website
 - [ ] Style music control
 - [ ] Add Bandcamp banner
 - [ ] For now: have a IFrame for distrokid
-- [ ] Add links to main portfolio page
-- [ ]
+- [ ] Add links (e.g. music and contact) to main portfolio page
+- [ ] Cleanup console.logs
