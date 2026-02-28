@@ -2,7 +2,6 @@ import MotionTitle from '@/components/MotionTitle'
 import P5Canvas from '@/components/P5Canvas'
 import { getAllLinks, LinkRecord } from '@/lib/linkStore'
 import colors from '../../lib/colors'
-export const runtime = 'nodejs'
 
 const Link = ({ color, link }: { color: string; link: LinkRecord }) => {
   return (
@@ -31,12 +30,13 @@ export default async function LinksPage() {
     .sort((a, b) => a.slug.localeCompare(b.slug))
 
   return (
-    <main className='pt-16'>
+    <main className='pt-16 relative'>
       <MotionTitle />
-      <div className='absolute inset-0 -z-10'>
+
+      <div className='absolute inset-0'>
         <P5Canvas />
       </div>
-      <section className='flex flex-col justify-center lg:px-72 pt-32'>
+      <section className='flex flex-col justify-center lg:px-72 pt-32 bg-white'>
         <div className='py-12'>
           <h1 className='text-center text-7xl font-black'>Links</h1>
           <h2 className='italic text-center'>look at all my things</h2>

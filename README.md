@@ -30,3 +30,5 @@ Personal portfolio and utility website
 - [ ] Day/Night mode?
 - [ ] Checks for project: is the slug valid? does the folder exist in public > projects? do all the referenced images and audio exist?
 - [ ] Animate links
+- [ ] Update song creation script
+- [ ] Add animation to music player: https://editor.p5js.org/js6450/sketches/XYnHHUIP7
