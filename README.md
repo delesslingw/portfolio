@@ -32,3 +32,14 @@ Personal portfolio and utility website
 - [ ] Animate links
 - [ ] Update song creation script
 - [ ] Add animation to music player: https://editor.p5js.org/js6450/sketches/XYnHHUIP7
+- [ ] Further refine the new-song.mjs script
+  - [ ] Remove....
+- [ ] Handle NOT FOUND in /music/...
+- [ ] separate sketch from P5Canvas
+- [ ] Add music visualizer sketch
+- [ ] Control music visualizer and play/stop buttons
+- [ ] Style music control
+- [ ] Add Bandcamp banner
+- [ ] For now: have a IFrame for distrokid
+- [ ] Add links to main portfolio page
+- [ ]
