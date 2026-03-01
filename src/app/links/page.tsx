@@ -1,5 +1,5 @@
+import BoidCanvas from '@/components/BoidCanvas'
 import MotionTitle from '@/components/MotionTitle'
-import P5Canvas from '@/components/P5Canvas'
 import { getAllLinks, LinkRecord } from '@/lib/linkStore'
 import colors from '../../lib/colors'
 
@@ -34,7 +34,7 @@ export default async function LinksPage() {
       <MotionTitle />
 
       <div className='absolute inset-0'>
-        <P5Canvas />
+        <BoidCanvas />
       </div>
       <section className='flex flex-col justify-center lg:px-72 pt-32 bg-white'>
         <div className='py-12'>
