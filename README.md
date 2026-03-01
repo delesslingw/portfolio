@@ -38,7 +38,7 @@ Personal portfolio and utility website
   - [x] Why "(CSV)" in audio filename and image filenames?
   - [x] What is the "Copy example image into first filename"? Probably can remove
 - [ ] Handle NOT FOUND in /music/...
-- [ ] separate sketch from P5Canvas
+- [x] separate sketch from P5Canvas
 - [ ] Add music visualizer sketch
 - [ ] Control music visualizer and play/stop buttons
 - [ ] Style music control

@@ -36,7 +36,7 @@ export default async function LinksPage() {
       <div className='absolute inset-0'>
         <BoidCanvas />
       </div>
-      <section className='flex flex-col justify-center lg:px-72 pt-32 bg-white'>
+      <section className='z-99 relative flex flex-col justify-center lg:px-72 pt-32 bg-white'>
         <div className='py-12'>
           <h1 className='text-center text-7xl font-black'>Links</h1>
           <h2 className='italic text-center'>look at all my things</h2>
