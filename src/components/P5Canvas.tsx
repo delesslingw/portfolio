@@ -20,7 +20,7 @@ export default function P5Canvas({ sketch }: { sketch: Sketch }) {
     return () => {
       p5Ref.current?.remove() // Clean up
     }
-  }, [])
+  }, [sketch])
 
   return <div ref={canvasRef} className='w-full h-full' />
 }
