@@ -92,13 +92,13 @@ function filterStreamingLinks(arr: unknown): StreamingLink[] {
   if (!Array.isArray(arr)) return []
 
   return arr
-    .filter(
-      (entry): entry is StreamingLink =>
-        typeof entry === 'object' &&
-        entry !== null &&
-        typeof (entry as any).label === 'string' &&
-        typeof (entry as any).url === 'string',
-    )
+    .filter((entry): entry is StreamingLink => {
+      if (typeof entry !== 'object' || entry === null) return false
+
+      const maybe = entry as Record<string, unknown>
+
+      return typeof maybe.label === 'string' && typeof maybe.url === 'string'
+    })
     .map((entry) => ({
       label: entry.label,
       url: entry.url,
@@ -111,8 +111,16 @@ export async function getSongBySlug(slug: string): Promise<Song | null> {
 
   try {
     raw = await fs.readFile(filePath, 'utf8')
-  } catch (e: any) {
-    if (e.code === 'ENOENT') return null
+  } catch (e: unknown) {
+    if (
+      typeof e === 'object' &&
+      e !== null &&
+      'code' in e &&
+      (e as { code?: string }).code === 'ENOENT'
+    ) {
+      return null
+    }
+
     throw e
   }
 
