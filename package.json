@@ -13,6 +13,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@deemlol/next-icons": "^0.1.9",
     "@p5-wrapper/react": "^4.4.2",
     "@radix-ui/react-slot": "^1.2.2",
     "@react-email/components": "^1.0.3",

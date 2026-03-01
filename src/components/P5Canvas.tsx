@@ -4,7 +4,6 @@ import p5 from 'p5'
 import { useEffect, useRef } from 'react'
 
 type Sketch = (p: p5) => void
-
 export default function P5Canvas({ sketch }: { sketch: Sketch }) {
   const canvasRef = useRef<HTMLDivElement>(null)
   const p5Ref = useRef<p5>(null)
