@@ -39,7 +39,7 @@ Personal portfolio and utility website
 - [ ] Add links (e.g. music and contact) to main portfolio page
 - [ ] Cleanup console.logs
 - [ ] Add light version of MotionTitle (default: dark)
-
+- [ ] handle no bandcamp
 ### COMPLETE
 - [x] Adapt design based on screen size
 - [x] Further refine the new-song.mjs script
