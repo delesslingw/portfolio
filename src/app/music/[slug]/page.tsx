@@ -23,7 +23,9 @@ export default async function Song({ params }: Props) {
   return (
     <main>
       <MotionTitle />
-      <MusicPlayer song={song} />
+      <section className='h-screen w-screen'>
+        <MusicPlayer song={song} />
+      </section>
       <section className='flex' style={{ backgroundColor: colors[2] }}>
         <Image
           src={song.images[0]}

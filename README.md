@@ -40,6 +40,7 @@ Personal portfolio and utility website
 - [ ] Cleanup console.logs
 - [ ] Add light version of MotionTitle (default: dark)
 - [ ] handle no bandcamp
+- [ ] Add design for fallback canvas in /music/[slug]
 ### COMPLETE
 - [x] Adapt design based on screen size
 - [x] Further refine the new-song.mjs script
