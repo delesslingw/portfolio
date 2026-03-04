@@ -54,7 +54,6 @@ export default function MusicSection({ song }: { song: Song }) {
   const sketch = useCallback((p: p5) => visualizerSketch(p, analyserRef), [])
   const src = song.audioFiles[0]
   const img = song.images[0]
-  console.log(img)
   return (
     <div className='h-full w-full relative'>
       <div className='flex absolute bottom-0 xl:bottom-10 xl:right-10 w-full xl:w-150 h-25 bg-white'>
