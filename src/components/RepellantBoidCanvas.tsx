@@ -5,7 +5,10 @@ import type p5 from 'p5'
 const sketch = (p: p5) => {
   let fadeIn = 0
 
-  // Pre-allocated reusable vector to avoid O(n²) allocations per frame in separation
+  // Pre-allocated reusable vectors to avoid GC pressure from O(n²) allocations per frame
+  let _alignSteering: p5.Vector
+  let _cohesionSteering: p5.Vector
+  let _sepSteering: p5.Vector
   let _diff: p5.Vector
 
   class Boid {
@@ -33,54 +36,54 @@ const sketch = (p: p5) => {
 
     align(boids: Boid[]) {
       const perceptionRadius = 50
-      const steering = p.createVector()
+      _alignSteering.set(0, 0)
       let total = 0
 
       for (const other of boids) {
         const d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y)
         if (other !== this && d < perceptionRadius) {
-          steering.add(other.vel)
+          _alignSteering.add(other.vel)
           total++
         }
       }
 
       if (total > 0) {
-        steering.div(total)
-        steering.setMag(this.maxSpeed)
-        steering.sub(this.vel)
-        steering.limit(this.maxForce)
+        _alignSteering.div(total)
+        _alignSteering.setMag(this.maxSpeed)
+        _alignSteering.sub(this.vel)
+        _alignSteering.limit(this.maxForce)
       }
 
-      return steering
+      return _alignSteering
     }
 
     cohesion(boids: Boid[]) {
       const perceptionRadius = 50
-      const steering = p.createVector()
+      _cohesionSteering.set(0, 0)
       let total = 0
 
       for (const other of boids) {
         const d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y)
         if (other !== this && d < perceptionRadius) {
-          steering.add(other.pos)
+          _cohesionSteering.add(other.pos)
           total++
         }
       }
 
       if (total > 0) {
-        steering.div(total)
-        steering.sub(this.pos)
-        steering.setMag(this.maxSpeed)
-        steering.sub(this.vel)
-        steering.limit(this.maxForce)
+        _cohesionSteering.div(total)
+        _cohesionSteering.sub(this.pos)
+        _cohesionSteering.setMag(this.maxSpeed)
+        _cohesionSteering.sub(this.vel)
+        _cohesionSteering.limit(this.maxForce)
       }
 
-      return steering
+      return _cohesionSteering
     }
 
     separation(boids: Boid[]) {
       const perceptionRadius = 24
-      const steering = p.createVector()
+      _sepSteering.set(0, 0)
       let total = 0
 
       for (const other of boids) {
@@ -88,19 +91,19 @@ const sketch = (p: p5) => {
         if (other !== this && d < perceptionRadius) {
           _diff.set(this.pos.x - other.pos.x, this.pos.y - other.pos.y)
           _diff.div(d * d)
-          steering.add(_diff)
+          _sepSteering.add(_diff)
           total++
         }
       }
 
       if (total > 0) {
-        steering.div(total)
-        steering.setMag(this.maxSpeed)
-        steering.sub(this.vel)
-        steering.limit(this.maxForce)
+        _sepSteering.div(total)
+        _sepSteering.setMag(this.maxSpeed)
+        _sepSteering.sub(this.vel)
+        _sepSteering.limit(this.maxForce)
       }
 
-      return steering
+      return _sepSteering
     }
 
     flock(boids: Boid[]) {
@@ -134,6 +137,9 @@ const sketch = (p: p5) => {
 
   p.setup = () => {
     p.createCanvas(p.windowWidth, p.windowHeight)
+    _alignSteering = p.createVector()
+    _cohesionSteering = p.createVector()
+    _sepSteering = p.createVector()
     _diff = p.createVector()
     for (let i = 0; i < 100; i++) {
       flock.push(new Boid())
@@ -155,6 +161,6 @@ const sketch = (p: p5) => {
   }
 }
 
-export default function BoidCanvas() {
+export default function RepellantBoidCanvas() {
   return <P5Canvas sketch={sketch} />
 }
