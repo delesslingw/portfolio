@@ -21,6 +21,16 @@ Personal portfolio and utility website
 
 ## TODO
 
+- [ ] /CV
+  - [ ] /CV.pdf
+  - [ ] Create spreadsheet on Drive
+    - [ ] Complete year-by-year review
+- [ ] /BIO
+  - [ ] Create BIO.md template with common bio sizes: 100, 250, 500, 1000
+  - [ ] Start with 250 words, then have a "want to know more?" that increases the number of words. Then "want to know even more? Check out my CV"
+- [ ] NAV: Nav buttons are lined up at the bottom of the homepage hero, and should fade/slide in following the title's fade in. As the user scrolls down past the hero they should pop up into the top right corner in a hamburger menu
+  - [ ] Buttons for about (/cv), links (/links), (/music)
+  - [ ] When hamburger menu is clicked, the links should fade/slide in from the top right and be lined up vertically.
 - [ ] Filter brand search params
 - [ ] How to order projects?
 - [ ] Add other art projects
@@ -41,6 +51,7 @@ Personal portfolio and utility website
 - [ ] Add light version of MotionTitle (default: dark)
 - [ ] handle no bandcamp
 - [ ] Add design for fallback canvas in /music/[slug]
+- [ ] ADd stylized breadcrumbs to title. on /music it should read "DELESSLIN'S music" or "DELESSLIN/music"
 ### COMPLETE
 - [x] Adapt design based on screen size
 - [x] Further refine the new-song.mjs script

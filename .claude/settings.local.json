@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:distrokid.com)"
+      "WebFetch(domain:distrokid.com)",
+      "Bash(ls -la /Users/delesslin/portfolio/*.* | grep -E \"\\\\.\\(ts|js|css|config\\)\")"
     ]
   }
 }
