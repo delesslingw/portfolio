@@ -70,3 +70,70 @@ export function HamburgerNav() {
     </div>
   )
 }
+
+// Always-on nav for sub-pages. Shows inline links (desktop) or hamburger (mobile)
+// while the hero is visible; collapses to hamburger for all sizes after scrolling past.
+// Pass `exclude` to hide the current page from the link list.
+export function PageNav({ exclude }: { exclude?: string }) {
+  const [heroVisible, setHeroVisible] = useState(true)
+  const [open, setOpen] = useState(false)
+
+  const links = NAV_LINKS.filter((l) => l.label !== exclude)
+
+  useEffect(() => {
+    const hero = document.getElementById('hero')
+    if (!hero) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHeroVisible(entry.isIntersecting)
+        if (entry.isIntersecting) setOpen(false)
+      },
+      { threshold: 0 },
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
+
+  const dropdown = open && (
+    <div className='absolute right-0 top-9 flex flex-col gap-1 border border-neutral-200 bg-white/90 backdrop-blur-sm px-4 py-3'>
+      {links.map(({ href, label }) => (
+        <NavLink key={href} href={href} label={label} onClick={() => setOpen(false)} />
+      ))}
+    </div>
+  )
+
+  const hamburgerButton = (
+    <button
+      onClick={() => setOpen((o) => !o)}
+      className='p-2 bg-white rounded-full text-neutral-700 hover:text-neutral-900 transition-colors'
+      aria-label={open ? 'Close menu' : 'Open menu'}
+    >
+      {open ? <X size={22} /> : <Menu size={22} />}
+    </button>
+  )
+
+  return (
+    <div className='fixed top-6 right-8 z-50'>
+      {heroVisible ? (
+        <>
+          {/* Desktop: inline links */}
+          <div className='hidden sm:flex gap-4'>
+            {links.map(({ href, label }) => (
+              <NavLink key={href} href={href} label={label} />
+            ))}
+          </div>
+          {/* Mobile: hamburger */}
+          <div className='relative sm:hidden'>
+            {hamburgerButton}
+            {dropdown}
+          </div>
+        </>
+      ) : (
+        <div className='relative'>
+          {hamburgerButton}
+          {dropdown}
+        </div>
+      )}
+    </div>
+  )
+}

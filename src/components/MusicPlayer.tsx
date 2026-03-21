@@ -6,30 +6,60 @@ import type p5 from 'p5'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import P5Canvas from './P5Canvas'
 import visualizerSketch from './visualizerSketch'
-export default function MusicSection({ song }: { song: Song }) {
+export default function MusicSection({
+  song,
+  isActive,
+  onPlay,
+}: {
+  song: Song
+  isActive?: boolean
+  onPlay?: () => void
+}) {
   const audioRef = useRef<HTMLAudioElement>(null)
   const audioContextRef = useRef<AudioContext | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
 
+  // AudioContext + source node: guarded by ref so createMediaElementSource is
+  // only ever called once per audio element. React Strict Mode runs effects twice
+  // in dev (mount → cleanup → remount); without the guard the remount crashes
+  // with InvalidStateError because the element is permanently "tainted" after the
+  // first createMediaElementSource call, even once the context is closed.
   useEffect(() => {
+    if (audioContextRef.current) return
+
     const audio = audioRef.current!
     const context = new AudioContext()
+    audioContextRef.current = context
+
     const source = context.createMediaElementSource(audio)
     const analyser = context.createAnalyser()
-
     analyser.fftSize = 512
-
     source.connect(analyser)
     analyser.connect(context.destination)
-
-    audioContextRef.current = context
     analyserRef.current = analyser
+  }, [])
 
+  // Sync isPlaying with native audio events (separate effect so listeners are
+  // properly added/removed independent of the AudioContext guard above)
+  useEffect(() => {
+    const audio = audioRef.current!
+    const handlePlay = () => setIsPlaying(true)
+    const handlePause = () => setIsPlaying(false)
+    audio.addEventListener('play', handlePlay)
+    audio.addEventListener('pause', handlePause)
     return () => {
-      context.close()
+      audio.removeEventListener('play', handlePlay)
+      audio.removeEventListener('pause', handlePause)
     }
   }, [])
+
+  // Pause when another track becomes active
+  useEffect(() => {
+    if (isActive === false) {
+      audioRef.current?.pause()
+    }
+  }, [isActive])
 
   const toggle = async () => {
     const audio = audioRef.current!
@@ -43,11 +73,10 @@ export default function MusicSection({ song }: { song: Song }) {
     }
 
     if (audio.paused) {
+      onPlay?.()
       await audio.play()
-      setIsPlaying(true)
     } else {
       audio.pause()
-      setIsPlaying(false)
     }
   }
 
