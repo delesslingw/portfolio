@@ -19,6 +19,41 @@ Personal portfolio and utility website
     - `gt submit`
     - `gt sync`
 
+## Wildcard Subdomain Routing — Future Task
+
+Goal: make `[slug].delesslin.studio` redirect to `delesslin.studio/[slug]` for any subdomain.
+
+### How it will work
+
+```
+Browser request
+      │
+      ▼
+*.delesslin.studio  (wildcard CNAME → Vercel)
+      │
+      └── [anything].delesslin.studio
+                │
+                └── Next.js middleware extracts subdomain as slug
+                          │
+                          └── 302 redirect → https://delesslin.studio/[slug]
+```
+
+### Tasks
+
+#### DNS — DNSimple (do first)
+- [ ] Add a wildcard CNAME record: Name `*`, Content `cname.vercel-dns.com` (check current Vercel target)
+- [ ] In Vercel project settings → Domains, add `*.delesslin.studio` as a custom domain
+- [ ] Verify Vercel provisions the wildcard SSL cert automatically (it should)
+
+#### Codebase
+- [ ] Create or update `src/middleware.ts` to inspect the `Host` header on every request
+  - If host matches `*.delesslin.studio` → extract the subdomain, issue a `NextResponse.redirect` to `https://delesslin.studio/[subdomain]` with a 302
+  - All other hosts → pass through unchanged
+- [ ] Test locally by spoofing the `Host` header: `curl -H "Host: fake-it.delesslin.studio" http://localhost:3000`
+- [ ] After deploying, verify: `fake-it.delesslin.studio` → `delesslin.studio/fake-it`
+
+---
+
 ## TODO
 
 - [ ] /CV
