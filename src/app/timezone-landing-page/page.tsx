@@ -34,7 +34,7 @@ function getOffsetHours(tz: string) {
     return (target.getTime() - eastern.getTime()) / (1000 * 60 * 60);
 }
 
-export default function NFEAIELandingPage() {
+export default function TimezoneLandingPage() {
     const [now, setNow] = useState(new Date());
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export default function NFEAIELandingPage() {
 
     return (
         <div className="flex flex-col items-center min-h-screen">
-            <div className="w-[1500px] h-[200px] flex justify-between items-center px-4">
+            <div className="w-full h-[200px] flex justify-between items-center px-4">
                 {Object.entries(ZONE_CONFIG).map(([zone, config]) => {
                     const time = now.toLocaleTimeString("en-US", {
                         timeZone: config.tz,
@@ -67,17 +67,18 @@ export default function NFEAIELandingPage() {
                             className="flex-1 mx-2 h-full flex flex-col items-center justify-center text-black"
                             style={{ backgroundColor: ZONE_COLORS[zone as keyof typeof ZONE_COLORS] }}
                         >
-                            <div className="text-lg font-semibold">{config.label}</div>
+                            <div className="text-base md:text-large font-semibold text-center">{config.label}</div>
 
-                            <div className="text-3xl font-bold">{time}</div>
+                            <div className="text-lg md:text-xl lg:text-3xl font-bold text-center">{time}</div>
 
-                            <div className="text-sm">{offsetLabel}</div>
+                            <div className="text-sm text-center">{offsetLabel}</div>
                         </div>
                     );
                 })}
             </div>
-
-            <Image src={MAP_IMAGE} alt="A map of US timezones" width={1500} height={350} />
+            <div className="flex-1 flex flex-col justify-center w-full content-center">
+                <Image src={MAP_IMAGE} alt="A map of US timezones" className="max-w-7xl h-auto mx-auto" />
+            </div>
         </div>
     );
 }
